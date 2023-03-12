@@ -102,4 +102,37 @@ public class FilmManagerTest {
 
         Assertions.assertEquals(actual, expected);
     }
+    @Test
+    public void testFindLastWhenNoFilms() {
+        FilmManager fm = new FilmManager(2);
+        String[] expected = {};
+        Assertions.assertArrayEquals(expected, fm.findLast());
+    }
+    @Test
+    public void testFindLastWhenArrayLengthIsLessThanLimit() {
+        FilmManager fm = new FilmManager(5);
+        fm.addFilm("Film1");
+        fm.addFilm("Film2");
+        String[] expected = {"Film2", "Film1"};
+        Assertions.assertArrayEquals(expected, fm.findLast());
+    }
+    @Test
+    public void testFindLastWhenArrayLengthIsMoreThanLimit() {
+        FilmManager fm = new FilmManager(2);
+        fm.addFilm("Film1");
+        fm.addFilm("Film2");
+        fm.addFilm("Film3");
+        String[] expected = {"Film3", "Film2"};
+        Assertions.assertArrayEquals(expected, fm.findLast());
+    }
+
+    @Test
+    public void testFindLastWhenArrayLengthIsEqualToLimit() {
+        FilmManager fm = new FilmManager(3);
+        fm.addFilm("Film1");
+        fm.addFilm("Film2");
+        fm.addFilm("Film3");
+        String[] expected = {"Film3", "Film2", "Film1"};
+        Assertions.assertArrayEquals(expected, fm.findLast());
+    }
 }
